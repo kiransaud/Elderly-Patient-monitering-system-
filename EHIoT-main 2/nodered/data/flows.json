@@ -1,0 +1,681 @@
+[
+    {
+        "id": "93e965988dc1ef0f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c923ddb62c759b56",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3c0b23800b402837",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "26792ae0515e310b",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "EHIoT",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://ehiot-main2-influxdb-1:8086",
+        "timeout": "5",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9d21464ebddd23a1",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 260,
+        "wires": [
+            [
+                "e7476496415f167e"
+            ]
+        ]
+    },
+    {
+        "id": "d52a9f7303f5921f",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set body temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 260,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    },
+    {
+        "id": "13abf6d3064da49d",
+        "type": "function",
+        "z": "93e965988dc1ef0f",
+        "name": "function 1",
+        "func": "msg.topic=\"InfluxData\"\nvar Pid = parseInt(msg.payload.pid)\nvar Heartbeat = parseFloat(msg.payload.heartrate)\nvar Temp = parseFloat(msg.payload.temperature)\nvar Xacc = parseFloat(msg.payload.xAcceleration)\nvar Yacc= parseFloat(msg.payload.yAcceleration)\nvar Zacc= parseFloat(msg.payload.zAcceleration)\n\nmsg.payload = {\n    \"patient_id\": Pid,\n    \"heartRate\": Heartbeat,\n    \"temperature\": Temp,\n    \"x_axis_acceleration\": Xacc,\n    \"y_axis_acceleration\": Yacc,\n    \"z_axis_acceleration\": Zacc,\n}\nreturn msg;\n\n// msg.payload = [\n//     {\n//         // measurement: \"patient_data\",\n//         tags: { patient_id: Pid },\n//         fields: {\n//             heartRate: Heartbeat,\n//             temperature: Temp,\n//             x_axis_acceleration:Xacc,\n//             y_axis_acceleration: Yacc,\n//             z_axis_acceleration: Zacc\n//         }\n//     }\n// ];\n// return msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 340,
+        "wires": [
+            [
+                "b2012431e11ea5cc",
+                "4a203da309f73ccf"
+            ]
+        ]
+    },
+    {
+        "id": "b2012431e11ea5cc",
+        "type": "debug",
+        "z": "93e965988dc1ef0f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "751deabdf9c9eb3e",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/heartbeat",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "fc32598c42b13e53"
+            ]
+        ]
+    },
+    {
+        "id": "4bcf42f6975257d1",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set heartbeat rate",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "heartrate",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    },
+    {
+        "id": "406af0af0f4a5c17",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/acceleration/x",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "9779f50c56a9b2ba"
+            ]
+        ]
+    },
+    {
+        "id": "0ed3a651e30d3e42",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set acceleration of x-axis",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xAcceleration",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    },
+    {
+        "id": "5439d48f750516f1",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/acceleration/y",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "9b5d022d0712f32d"
+            ]
+        ]
+    },
+    {
+        "id": "912a54501f239d2d",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set acceleration of y-axis",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "yAcceleration",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 500,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    },
+    {
+        "id": "6aab9246f8209058",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set acceleration of z-axis",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "zAcceleration",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 580,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    },
+    {
+        "id": "f3951aee539a57e3",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/acceleration/z",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "e44e8a92ba85b3f7"
+            ]
+        ]
+    },
+    {
+        "id": "e7476496415f167e",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "d52a9f7303f5921f"
+            ]
+        ]
+    },
+    {
+        "id": "fc32598c42b13e53",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "4bcf42f6975257d1"
+            ]
+        ]
+    },
+    {
+        "id": "9779f50c56a9b2ba",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 420,
+        "wires": [
+            [
+                "0ed3a651e30d3e42"
+            ]
+        ]
+    },
+    {
+        "id": "0de9d6a744080b97",
+        "type": "join",
+        "z": "93e965988dc1ef0f",
+        "name": "join all sensors data",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "6",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 860,
+        "y": 340,
+        "wires": [
+            [
+                "13abf6d3064da49d",
+                "45c1009c7cde270f"
+            ]
+        ]
+    },
+    {
+        "id": "45c1009c7cde270f",
+        "type": "debug",
+        "z": "93e965988dc1ef0f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9b5d022d0712f32d",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 500,
+        "wires": [
+            [
+                "912a54501f239d2d"
+            ]
+        ]
+    },
+    {
+        "id": "e44e8a92ba85b3f7",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 580,
+        "wires": [
+            [
+                "6aab9246f8209058"
+            ]
+        ]
+    },
+    {
+        "id": "4a203da309f73ccf",
+        "type": "influxdb out",
+        "z": "93e965988dc1ef0f",
+        "influxdb": "26792ae0515e310b",
+        "name": "EHIoTDB",
+        "measurement": "Patients_Data",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "UNIVAQ",
+        "bucket": "Data_EHIOT",
+        "x": 1300,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "9c95adfa60b6a539",
+        "type": "mqtt in",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "topic": "/EHIoT/pid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c923ddb62c759b56",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 180,
+        "wires": [
+            [
+                "46dea6db0337c3bb"
+            ]
+        ]
+    },
+    {
+        "id": "46dea6db0337c3bb",
+        "type": "json",
+        "z": "93e965988dc1ef0f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "b57627bddd9de8e9"
+            ]
+        ]
+    },
+    {
+        "id": "b57627bddd9de8e9",
+        "type": "change",
+        "z": "93e965988dc1ef0f",
+        "name": "set patient id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "pid",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "0de9d6a744080b97"
+            ]
+        ]
+    }
+]
